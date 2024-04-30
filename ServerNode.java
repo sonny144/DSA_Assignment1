@@ -1,22 +1,31 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServerNode {
+class ServerNode {
+    private String name;
     private List<ClientNode> clients;
 
-    public ServerNode() {
+    public ServerNode(String name) {
+        this.name = name;
         this.clients = new ArrayList<>();
     }
 
-    public void registerClient(ClientNode client) {
-        this.clients.add(client);
-    }
-
-    public void sendMessage(String message, ClientNode sender) {
+    // Broker messages sent by client node objects
+    public void brokerMessage(ClientNode sender, String message) {
         for (ClientNode client : clients) {
-            if (client != sender) {
-                client.receive(message, sender.getClientName());
+            if (!client.equals(sender)) {
+                client.receive(message, sender.getName());
             }
         }
+    }
+
+    // Add a client to the server node
+    public void addClient(ClientNode client) {
+        clients.add(client);
+    }
+
+    // Remove a client from the server node
+    public void removeClient(ClientNode client) {
+        clients.remove(client);
     }
 }
