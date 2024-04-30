@@ -10,7 +10,7 @@ public class ClientNode { // this represents a client Node which can send and re
         messages = new ArrayList<>(); //we initialize the list for the messages
     }
 
-    public void send(String message, ServerNode server,ClientNode recipient) { // send method takes in the message to be sent and also the server node to which the message is being sent
+    public void send(String message, ServerNode server,ClientNode recipient) { // send method takes in the message to be sent server and client node to which the message is being sent
         System.out.println(this.ID + " sending message: \"" + message + "\"");
         byte[] compressedMessage = CompressionUtil.compress(message); //compress the message
         server.brokerMessage(compressedMessage, this.ID); // delivers message to the server
