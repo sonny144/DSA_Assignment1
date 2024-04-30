@@ -1,21 +1,23 @@
-class ClientNode {
-    private String name;
+public class ClientNode {
+    private int id;
+    private ServerNode server;
 
-    public ClientNode(String name) {
-        this.name = name;
+    public ClientNode(int id, ServerNode server) { // Add missing closing parenthesis and semicolon
+        this.id = id;
+        this.server = server;
     }
 
-    // Send message, wrapper around server's method
-    public void send(ServerNode server, String message) {
-        server.brokerMessage(this, message);
+    public String getID() {
+        return String.valueOf(id);
     }
 
-    // Receive message
-    public void receive(String message, String senderName) {
-        System.out.println("Message from " + senderName + ": " + message);
+    public void send(String message) {
+        server.brokerMessage(message, this);
     }
 
-    public String getName() {
-        return name;
+    // Implement method to receive individual characters during decompression
+    public void receiveChar(char c) {
+        // Implement logic to handle the received character (e.g., display on console, store in a buffer)
+        System.out.print(c); // Example: Print the character to the console
     }
 }

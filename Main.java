@@ -1,24 +1,28 @@
 public class Main {
+
     public static void main(String[] args) {
+        // Create a server node
+        ServerNode server = new ServerNode();
+
+        // Create client nodes with unique IDs (adjust as needed)
+        int clientId = 1;
+        ClientNode client1 = new ClientNode(clientId++, server);
+        ClientNode client2 = new ClientNode(clientId++, server);
+        ClientNode client3 = new ClientNode(clientId++, server);
+
         // Create a star network
-        Star network = new Star("CentralServer");
+        Star network = new Star(server);
 
-        // Create client nodes
-        ClientNode client1 = new ClientNode("Client1");
-        ClientNode client2 = new ClientNode("Client2");
-
-        // Insert client nodes into the network
+        // Insert client nodes into the star network
         network.insertNode(client1);
         network.insertNode(client2);
+        network.insertNode(client3);
 
-        // Simulate message sending
-        client1.send(network.centralNode, "Hello from Client1");
-        client2.send(network.centralNode, "Hello from Client2");
+        // Send messages with compression (targeted delivery)
+        client1.send("Hello from Client1 to Client2."); // Targeted message
+        client2.send("Greetings from Client2 to all!"); // Broadcast message
+        client3.send("Hi everyone, this is Client3.");  // Broadcast message
 
-        // Delete a node from the network
-        network.deleteNode(client1);
-
-        // Message after deletion
-        client2.send(network.centralNode, "Hello again from Client2");
+        System.out.println("\n--- After sending messages ---");
     }
 }

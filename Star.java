@@ -1,17 +1,15 @@
-class Star {
-    public ServerNode centralNode;
+public class Star {
+    private ServerNode server;
 
-    public Star(String centralNodeName) {
-        this.centralNode = new ServerNode(centralNodeName);
+    public Star(ServerNode server) {
+        this.server = server;
     }
 
-    // Insert a node to the model
     public void insertNode(ClientNode client) {
-        centralNode.addClient(client);
+        server.addClient(client);
     }
 
-    // Delete a node from the model
     public void deleteNode(ClientNode client) {
-        centralNode.removeClient(client);
+        server.removeClient(client);
     }
 }
