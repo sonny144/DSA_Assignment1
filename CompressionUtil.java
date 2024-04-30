@@ -1,6 +1,6 @@
 public class CompressionUtil {
 
-    // Compresses  string using RLE
+    // Compresses a string using RLE and prints the size comparison
     public static byte[] compress(String text) {
         StringBuilder compressed = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
@@ -12,7 +12,10 @@ public class CompressionUtil {
             compressed.append(text.charAt(i));
             compressed.append(count);
         }
-        return compressed.toString().getBytes();
+        byte[] compressedBytes = compressed.toString().getBytes();
+        System.out.println("Original size: " + text.length() + " characters");
+        System.out.println("Compressed size: " + compressedBytes.length + " bytes");
+        return compressedBytes;
     }
 
     // Decompresses a string using RLE
